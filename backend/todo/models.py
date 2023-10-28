@@ -8,4 +8,4 @@ class Todo(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return self.title
+        return self.body
