@@ -12,3 +12,6 @@ Generate the configuration files:
 ```npx tailwindcss init -p```
 
 ```npm run dev```
+
+React Icons:
+```npm install react-icons --save```
