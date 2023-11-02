@@ -6,19 +6,22 @@ import axios from "axios";
 
 function App() {
   const [todos, setTodos] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/api/todo/");
+        setTodos(response.data); // Assuming 'response.data' contains the todos
+        setIsLoading(false);
+        console.log(response.data); // Log the response data
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("http://127.0.0.1:8000/api/todo/");
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    fetchData(); // Call fetchData function within useEffect
+  }, []);
 
   return (
     <>
@@ -27,7 +30,11 @@ function App() {
           <h1 className="text-5xl text-center pb-12">ToDo List</h1>
         </nav>
         <TodoForm />
-        <Table />
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <Table todos={todos} setTodos={setTodos} />
+        )}{" "}
       </div>
     </>
   );
