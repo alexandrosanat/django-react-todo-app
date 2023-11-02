@@ -15,13 +15,59 @@ const Table = () => {
         </thead>
         <tbody>
           <tr>
-            <td className='p-3 text-sm'>true</td>
+            <td className='p-3'>
+              <span className='inline-block cursor-pointer'> <MdOutlineCheckBox /></span>
+            </td>
             <td className='p-3 text-sm'>Lorem ipsum dolor sit.</td>
-            <td className='p-3 text-sm'>Done</td>
+            <td className='p-3 text-sm'>
+              <span className='p-1.5 text-sm font-medium tracking-wider rounded-md bg-green-300'>Done</span>
+            </td>
             <td className='p-3 text-sm'>22-04-2023</td>
             <td className='p-3 text-sm font-medium grid grid-flow-col items-center mt-5'>
-              <span> <MdEditNote /></span>
-              <span> <MdOutlineDeleteOutline /></span>
+              <span className='text-xl cursor-pointer'> <MdEditNote /></span>
+              <span className='text-xl cursor-pointer'> <MdOutlineDeleteOutline /></span>
+            </td>
+          </tr>
+          <tr>
+            <td className='p-3'>
+              <span className='inline-block cursor-pointer'> <MdOutlineCheckBox /></span>
+            </td>
+            <td className='p-3 text-sm'>Lorem ipsum dolor sit.</td>
+            <td className='p-3 text-sm'>
+              <span className='p-1.5 text-sm font-medium tracking-wider rounded-md bg-green-300'>Done</span>
+            </td>
+            <td className='p-3 text-sm'>22-04-2023</td>
+            <td className='p-3 text-sm font-medium grid grid-flow-col items-center mt-5'>
+              <span className='text-xl cursor-pointer'> <MdEditNote /></span>
+              <span className='text-xl cursor-pointer'> <MdOutlineDeleteOutline /></span>
+            </td>
+          </tr>
+          <tr>
+            <td className='p-3'>
+              <span className='inline-block cursor-pointer'> <MdOutlineCheckBox /></span>
+            </td>
+            <td className='p-3 text-sm'>Lorem ipsum dolor sit.</td>
+            <td className='p-3 text-sm'>
+              <span className='p-1.5 text-sm font-medium tracking-wider rounded-md bg-green-300'>Done</span>
+            </td>
+            <td className='p-3 text-sm'>22-04-2023</td>
+            <td className='p-3 text-sm font-medium grid grid-flow-col items-center mt-5'>
+              <span className='text-xl cursor-pointer'> <MdEditNote /></span>
+              <span className='text-xl cursor-pointer'> <MdOutlineDeleteOutline /></span>
+            </td>
+          </tr>
+          <tr>
+            <td className='p-3'>
+              <span className='inline-block cursor-pointer'> <MdOutlineCheckBox /></span>
+            </td>
+            <td className='p-3 text-sm'>Lorem ipsum dolor sit.</td>
+            <td className='p-3 text-sm'>
+              <span className='p-1.5 text-sm font-medium tracking-wider rounded-md bg-green-300'>Done</span>
+            </td>
+            <td className='p-3 text-sm'>22-04-2023</td>
+            <td className='p-3 text-sm font-medium grid grid-flow-col items-center mt-5'>
+              <span className='text-xl cursor-pointer'> <MdEditNote /></span>
+              <span className='text-xl cursor-pointer'> <MdOutlineDeleteOutline /></span>
             </td>
           </tr>
         </tbody>
