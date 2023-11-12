@@ -14,8 +14,10 @@ Generate the configuration files:
 ```npm run dev```
 
 React Icons:
+https://react-icons.github.io/react-icons
 ```npm install react-icons --save```
 
+https://daisyui.com/
 https://daisyui.com/docs/install/
 ```npm i -D daisyui@latest```
 

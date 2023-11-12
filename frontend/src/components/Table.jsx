@@ -1,22 +1,63 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import {
   MdOutlineDeleteOutline,
   MdEditNote,
   MdOutlineCheckBox,
   MdOutlineCheckBoxOutlineBlank,
 } from "react-icons/md";
+import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
 
 const Table = ({ todos, setTodos }) => {
+  const [editText, setEditText] = useState({
+    body: "",
+  });
+
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://127.0.0.1:8000/api/todo/${id}/`);
-      const newList = todos.filter(todo => todo.id !== id)
-      setTodos(newList)
+      const newList = todos.filter((todo) => todo.id !== id);
+      setTodos(newList);
     } catch (error) {
       console.log(error);
     }
   };
+
+  // We are making a patch request and depending on the value
+  // the respective value will be updated in the api
+  const handleEdit = async (id, value) => {
+    try {
+      const response = await axios.patch(
+        `http://127.0.0.1:8000/api/todo/${id}/`,
+        value
+      );
+      const newTodos = todos.map((todo) =>
+        todo.id === id ? response.data : todo
+      );
+      setTodos(newTodos);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCheckbox = (id, value) => {
+    handleEdit(id, {
+      completed: !value,
+    });
+  };
+
+  const handleChange = (e) => {
+    setEditText((prev) => ({
+      ...prev,
+      body: e.target.value,
+    }));
+  };
+
+  const handleClick = () => {
+    document.getElementById("my_modal_1").showModal()
+    setEditText(todoItem)
+  };
+
 
   return (
     <div className="py-2">
@@ -42,12 +83,17 @@ const Table = ({ todos, setTodos }) => {
             return (
               <tr key={todoItem.id} className="border-b border-black">
                 <td className="p-3" title={todoItem.id}>
-                  <span className="inline-block cursor-pointer">
+                  <span
+                    onClick={() =>
+                      handleCheckbox(todoItem.id, todoItem.completed)
+                    }
+                    className="inline-block cursor-pointer"
+                  >
                     {" "}
                     {todoItem.completed ? (
-                      <MdOutlineCheckBox />
+                      <ImCheckboxChecked />
                     ) : (
-                      <MdOutlineCheckBoxOutlineBlank />
+                      <ImCheckboxUnchecked />
                     )}
                   </span>
                 </td>
@@ -67,7 +113,9 @@ const Table = ({ todos, setTodos }) => {
                 <td className="p-3 text-sm font-medium grid grid-flow-col items-center mt-5">
                   <span className="text-xl cursor-pointer">
                     {" "}
-                    <MdEditNote />
+                    <MdEditNote
+                      onClick={handleClick}
+                    />
                   </span>
                   <span className="text-xl cursor-pointer">
                     {" "}
@@ -81,6 +129,31 @@ const Table = ({ todos, setTodos }) => {
           })}
         </tbody>
       </table>
+
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Edit Todo</h3>
+          <p className="py-4">
+            <input
+              type="text"
+              value={editText.body}
+              onChange={handleChange}
+              className="input input-bordered w-full max-w-xs"
+            />
+          </p>
+          <div className="modal-action">
+            <form method="dialog">
+              <button
+                className="btn btn-primary mx-3"
+                onClick={() => handleEdit(editText.id, editText)}
+              >
+                Edit
+              </button>
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };
