@@ -16,7 +16,8 @@ const TodoForm = ({ fetchData }) => {
   const postTodo = async () => {
     try {
       await axios.post("http://127.0.0.1:8000/api/todo/", newTodo);
-      fetchData()
+      setNewTodo({"body": ""})
+      fetchData();
     } catch (error) {
       console.log(error);
     }
@@ -29,6 +30,11 @@ const TodoForm = ({ fetchData }) => {
         placeholder="Add Todo"
         className="input input-bordered w-full max-w-xs"
         onChange={handleChange}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            postTodo();
+          }
+        }}
         value={newTodo.body}
       />
       <button className="btn btn-outline btn-primary mx-3" onClick={postTodo}>
