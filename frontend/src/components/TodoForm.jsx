@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const TodoForm = ({ setTodos, fetchData }) => {
+const TodoForm = ({ fetchData }) => {
   const [newTodo, setNewTodo] = useState({
     body: "",
   });
@@ -16,6 +16,7 @@ const TodoForm = ({ setTodos, fetchData }) => {
   const postTodo = async () => {
     try {
       await axios.post("http://127.0.0.1:8000/api/todo/", newTodo);
+      fetchData()
     } catch (error) {
       console.log(error);
     }
