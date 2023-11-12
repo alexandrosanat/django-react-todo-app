@@ -22,41 +22,48 @@ const Table = ({ todos, setTodos }) => {
               Status
             </th>
             <th className="p-3 text-sm font-semibold tracking-wide text-left">
-              Data Created
+              Date Created
             </th>
           </tr>
         </thead>
         <tbody>
-          { todos.map((todoItem, index) => {
-            return(
+          {todos.map((todoItem, index) => {
+            return (
               <tr key={todoItem.id} className="border-b border-black">
-              <td className="p-3">
-                <span className="inline-block cursor-pointer">
-                  {" "}
-                  <MdOutlineCheckBox />
-                </span>
-              </td>
-              <td className="p-3 text-sm">{todoItem.body}</td>
-              <td className="p-3 text-sm">
-                <span className="p-1.5 text-sm font-medium tracking-wider rounded-md bg-green-300">
-                  Done
-                </span>
-              </td>
-              <td className="p-3 text-sm">{todoItem.date}</td>
-              <td className="p-3 text-sm font-medium grid grid-flow-col items-center mt-5">
-                <span className="text-xl cursor-pointer">
-                  {" "}
-                  <MdEditNote />
-                </span>
-                <span className="text-xl cursor-pointer">
-                  {" "}
-                  <MdOutlineDeleteOutline />
-                </span>
-              </td>
-            </tr>
-            )
-          })
-          }
+                <td className="p-3" title={todoItem.id}>
+                  <span className="inline-block cursor-pointer">
+                    {" "}
+                    {todoItem.completed ? (
+                      <MdOutlineCheckBox />
+                    ) : (
+                      <MdOutlineCheckBoxOutlineBlank />
+                    )}
+                  </span>
+                </td>
+                <td className="p-3 text-sm">{todoItem.body}</td>
+                <td className="p-3 text-sm">
+                  <span
+                    className={`p-1.5 text-sm font-medium tracking-wider rounded-md ${
+                      todoItem.completed ? "bg-green-300" : "bg-red-300"
+                    }`}
+                  >
+                    {todoItem.completed ? "Done" : "Todo"}
+                  </span>
+                </td>
+                <td className="p-3 text-sm">{new Date(todoItem.created).toLocaleString()}</td>
+                <td className="p-3 text-sm font-medium grid grid-flow-col items-center mt-5">
+                  <span className="text-xl cursor-pointer">
+                    {" "}
+                    <MdEditNote />
+                  </span>
+                  <span className="text-xl cursor-pointer">
+                    {" "}
+                    <MdOutlineDeleteOutline />
+                  </span>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
